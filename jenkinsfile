@@ -1,20 +1,42 @@
-pipeline{
-    agent any
-    stages{
-        stage('checkout'){
-            steps{
-                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Venna12/taxi-booking.git']])
+pipeline {
+    agent any 
+    
+    stages {
+        
+        
+        stage('Cleanup') {
+            steps {
+                sh 'rm -rf taxi-booking'  // Delete old project
             }
         }
-        stage('Build'){
-            steps{
-                sh "mvn package"
+        
+        stage('Print') {
+            steps {
+                echo 'new project'
             }
         }
-        stage('Deploy to tomcat'){
-            steps{
-                deploy adapters: [tomcat9(credentialsId: '527db3ea-545b-436b-bcbd-3c786d08d357', path: '', url: 'http://3.137.216.135:8080/')], contextPath: 'goutham', war: '**/*.war'
+        
+        stage('Clone') {
+            steps {
+                sh 'git clone -b dev https://github.com/reddi122/taxi-booking.git'
             }
         }
+        
+        
+        
+        stage('Build') {
+            steps {
+                dir("taxi-booking") { // Ensure build runs inside the cloned project
+                    sh 'mvn clean package'
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                sh 'cp taxi-booking/taxi-booking/target/*.war /opt/tomcat/webapps/'
+            }
+        }
+
     }
 }
