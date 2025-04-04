@@ -30,9 +30,8 @@ pipeline {
 
         stage('Archive Artifacts') {
             steps {
-                dir('taxi-booking') {
-                    archiveArtifacts artifacts: 'taxi-booking/target/*.jar', fingerprint: true
-                }
+                archiveArtifacts artifacts: 'taxi-booking/taxi-booking/target/*.war', fingerprint: true
+
             }
         }
 
