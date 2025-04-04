@@ -19,7 +19,7 @@ b c cb xznbv casBC SA
 c c cxbczxb cb
 cb cbx nzxk
 cb xbc xbn zxBk
- ncbxbc bxcz
+ ncbxbc bxczs
  casbc andc ansc
  ascasn cnascs'
  cdscnas csa'k
