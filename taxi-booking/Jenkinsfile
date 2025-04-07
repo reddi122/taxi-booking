@@ -28,10 +28,14 @@ pipeline {
             }
         }
 
-        stage('Archive Artifacts') {
+        stage('Test') {
             steps {
-                archiveArtifacts artifacts: 'taxi-booking/taxi-booking/target/*.war', fingerprint: true
-
+                sh 'echo Running tests...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo Deploying application...'
             }
         }
 
